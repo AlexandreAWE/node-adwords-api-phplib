@@ -12,7 +12,7 @@ describe('ManagedCustomerService - getAccountList', function(){
 
 		var options = {
 			credentials: auth,
-			clientCustomerId: '462-328-8819'
+			clientCustomerId: '4623288819'
 		};
 
 		adwords.ManagedCustomerService.getAccountList(options, function(err, result){

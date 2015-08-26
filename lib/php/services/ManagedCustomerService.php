@@ -29,10 +29,12 @@ class ManagedCustomerService extends base {
 		$accounts = array();
 
 		foreach ($graph->entries as $account){
-		  $accounts[] = [
-			  "customerId" => $account->customerId,
-			  "name" 	   => $account->name
-		  ];
+		  if ($this->AdWordsUser->GetClientCustomerId() !== $account->customerId) {
+			  $accounts[] = [
+				  "customerId" => $account->customerId,
+				  "name" 	   => $account->name
+			  ];
+		  }
 		}
 
 		return $accounts;
