@@ -1,0 +1,31 @@
+{
+  "name": "node-adwords-api-phplib",
+  "version": "0.0.1",
+  "description": "This package is using AdWords PHP lib in order to use AdWordsAPI with NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "preinstall": "bash build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexandreAWE/node-adwords-api-phplib.git"
+  },
+  "keywords": [
+    "AdWords",
+    "API"
+  ],
+  "author": "Alexandre Da Costa <alexandre.dacosta94@gmail.com> (www.alexandredacosta.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexandreAWE/node-adwords-api-phplib/issues"
+  },
+  "homepage": "https://github.com/AlexandreAWE/node-adwords-api-phplib",
+  "dependencies": {
+    "async": "^1.4.2"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.2.5"
+  }
+}

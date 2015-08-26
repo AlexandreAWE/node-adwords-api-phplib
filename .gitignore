@@ -1,0 +1,7 @@
+composer.json
+composer.lock
+composer.phar
+vendor
+temp
+node_modules
+test/options.test.js
