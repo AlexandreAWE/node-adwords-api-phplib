@@ -5,7 +5,7 @@ var expect  = require('expect.js');
 var adwords = require('../index');
 var auth    = require('./auth.test.js');
 
-describe('Method - Reporting', function(){
+describe('ReportDefinitionService - createReporting', function(){
 
 	it('Should return Array', function(done){
 		this.timeout(30000);
@@ -20,7 +20,7 @@ describe('Method - Reporting', function(){
 			'clientCustomerId' : '734-817-8239'
 		};
 
-		adwords.createReport(options, function(err, result){
+		adwords.ReportDefinitionService.createReport(options, function(err, result){
 			if (err) {
 				done(err);
 			}

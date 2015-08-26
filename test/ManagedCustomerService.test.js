@@ -4,7 +4,7 @@ var expect  = require('expect.js');
 var adwords = require('../index');
 var auth    = require('./auth.test.js');
 
-describe('Method - Account', function(){
+describe('ManagedCustomerService - getAccountList', function(){
 
 	it('Should return Array', function(done){
 
@@ -15,7 +15,7 @@ describe('Method - Account', function(){
 			clientCustomerId: '462-328-8819'
 		};
 
-		adwords.getAccountList(options, function(err, result){
+		adwords.ManagedCustomerService.getAccountList(options, function(err, result){
 			if (err) {
 				done(err);
 			}

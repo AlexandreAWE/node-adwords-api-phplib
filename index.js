@@ -59,45 +59,59 @@ var addTask = function addTask(options, callback) {
 
 
 /**
- * Create AdwordsReport
- * @param  {Object} options
- *   {Object} options.credentials
- *   {String} options.credentials['client_id']
- *   {String} options.credentials['client_secret']
- *   {String} options.credentials['refresh_token']
- *   {String} options.credentials['developer_token']
- *
- *   {Object} options.reportDefinition
- *   {String} options.reportDefinition['reportType']
- *   {Object} options.reportDefinition['periode']
- *   {Date}   options.reportDefinition['periode']['start']
- *   {Date}   options.reportDefinition['periode']['end']
- *   {Array}  options.reportDefinition['fields']
- *
- * 	 {String} options.clientCustomerId
- * @param  {Function} callback
- * @return {Array}
+ * [ReportDefinitionService]
+ * @type {Object}
  */
-exports.createReport = function createReport(options, callback) {
-	options.method = 'ManagedCustomerService-createReporting';
-	addTask(options, callback);
+exports.ReportDefinitionService = {
+
+	/**
+	 * Create AdwordsReport
+	 * @param  {Object} options
+	 *   {Object} options.credentials
+	 *   {String} options.credentials['client_id']
+	 *   {String} options.credentials['client_secret']
+	 *   {String} options.credentials['refresh_token']
+	 *   {String} options.credentials['developer_token']
+	 *
+	 *   {Object} options.reportDefinition
+	 *   {String} options.reportDefinition['reportType']
+	 *   {Object} options.reportDefinition['periode']
+	 *   {Date}   options.reportDefinition['periode']['start']
+	 *   {Date}   options.reportDefinition['periode']['end']
+	 *   {Array}  options.reportDefinition['fields']
+	 *
+	 * 	 {String} options.clientCustomerId
+	 * @param  {Function} callback
+	 * @return {Array}
+	 */
+	createReport: function createReport(options, callback) {
+		options.method = 'ManagedCustomerService-createReporting';
+		addTask(options, callback);
+	}
 };
 
 
 /**
- * MCC Account List
- * @param  {Object} options
- *   {Object} options.credentials
- *   {String} options.credentials['client_id']
- *   {String} options.credentials['client_secret']
- *   {String} options.credentials['refresh_token']
- *   {String} options.credentials['developer_token']
- *
- * 	 {String} options.clientCustomerId
- * @param  {Function} callback
- * @return {Array}
+ * [getAccountList]
+ * @type {Object}
  */
-exports.getAccountList = function accountList(options, callback) {
-	options.method = 'ManagedCustomerService-getAccountList';
-	addTask(options, callback);
+exports.ManagedCustomerService = {
+
+	/**
+	 * MCC Account List
+	 * @param  {Object} options
+	 *   {Object} options.credentials
+	 *   {String} options.credentials['client_id']
+	 *   {String} options.credentials['client_secret']
+	 *   {String} options.credentials['refresh_token']
+	 *   {String} options.credentials['developer_token']
+	 *
+	 * 	 {String} options.clientCustomerId
+	 * @param  {Function} callback
+	 * @return {Array}
+	 */
+	getAccountList: function accountList(options, callback) {
+		options.method = 'ManagedCustomerService-getAccountList';
+		addTask(options, callback);
+	}
 };
