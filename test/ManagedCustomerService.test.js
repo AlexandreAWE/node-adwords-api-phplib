@@ -1,6 +1,5 @@
 'use strict';
 
-var async	= require('async');
 var expect  = require('expect.js');
 var adwords = require('../index');
 var auth    = require('./auth.test.js');
@@ -16,7 +15,7 @@ describe('Method - Account', function(){
 			clientCustomerId: '462-328-8819'
 		};
 
-		adwords.accountList(options, function(err, result){
+		adwords.getAccountList(options, function(err, result){
 			if (err) {
 				done(err);
 			}

@@ -1,8 +1,10 @@
 <?php
 
+namespace NodeAdWordsApiPhpLib;
+
 require_once dirname(__FILE__).'/../base.php';
 
-class account extends base {
+class ManagedCustomerService extends base {
 
 	public function getList() {
 		$list = $this->getAccounts();
@@ -21,7 +23,7 @@ class account extends base {
 	 */
 	private function getAccounts(){
 		$managedCustomerService = $this->AdWordsUser->GetService('ManagedCustomerService', ADWORDS_VERSION);
-		$selector = new Selector();
+		$selector = new \Selector();
 		$selector->fields = array('Name','CustomerId');
 		$graph = $managedCustomerService->get($selector);
 		$accounts = array();

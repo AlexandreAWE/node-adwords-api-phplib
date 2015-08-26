@@ -1,5 +1,7 @@
 <?php
 
+namespace NodeAdWordsApiPhpLib;
+
 require_once dirname(__FILE__).'/init.php';
 
 class base {
@@ -21,7 +23,7 @@ class base {
 			'refresh_token' => $options['refresh_token']
 		);
 
-		$this->AdWordsUser = new AdWordsUser(NULL, $options['developer_token'], 'AWE', NULL, NULL, $OAuth2);
+		$this->AdWordsUser = new \AdWordsUser(NULL, $options['developer_token'], 'AWE', NULL, NULL, $OAuth2);
 	}
 
 	/**

@@ -1,9 +1,11 @@
 <?php
 
+namespace NodeAdWordsApiPhpLib;
+
 require_once dirname(__FILE__).'/../base.php';
 require_once ADWORDS_UTIL_PATH.'/ReportUtils.php';
 
-class AdWordsReporting extends base {
+class ReportDefinitionService extends base {
 
 	private $tempDirPath = '/../../../temp/';
 	private $result;
@@ -20,12 +22,12 @@ class AdWordsReporting extends base {
 		$this->AdWordsUser->LoadService('ReportDefinitionService', ADWORDS_VERSION);
 
 		// Create selector.
-		$selector = new Selector();
+		$selector = new \Selector();
 		$selector->fields 	  = $definition['fields'];
 		$selector->predicates = isset($definition['predicates']) ? $definition['predicates'] : array();
-		$selector->dateRange  = new DateRange(
-			(new DateTime($definition['periode']['start']))->format('Ymd'),
-			(new DateTime($definition['periode']['end']))->format('Ymd')
+		$selector->dateRange  = new \DateRange(
+			(new \DateTime($definition['periode']['start']))->format('Ymd'),
+			(new \DateTime($definition['periode']['end']))->format('Ymd')
 		);
 
 		// Create report definition.
@@ -41,11 +43,11 @@ class AdWordsReporting extends base {
 
 		// Download report.
 		try{
-			$report 	  = ReportUtils::DownloadReport($reportDefinition, $filePath, $this->AdWordsUser, $options);
+			$report 	  = \ReportUtils::DownloadReport($reportDefinition, $filePath, $this->AdWordsUser, $options);
 			$this->result = $this->parseAccountReport($filePath);
 			$this->result = $this->convertMicroMoney($definition['fields'], $this->result);
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 		  	printf("An error has occurred: %s\n", $e->getMessage());
 		}
 

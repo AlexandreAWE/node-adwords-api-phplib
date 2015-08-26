@@ -79,7 +79,7 @@ var addTask = function addTask(options, callback) {
  * @return {Array}
  */
 exports.createReport = function createReport(options, callback) {
-	options.method = 'reporting';
+	options.method = 'ManagedCustomerService-createReporting';
 	addTask(options, callback);
 };
 
@@ -97,7 +97,7 @@ exports.createReport = function createReport(options, callback) {
  * @param  {Function} callback
  * @return {Array}
  */
-exports.accountList = function accountList(options, callback) {
-	options.method = 'accountList';
+exports.getAccountList = function accountList(options, callback) {
+	options.method = 'ManagedCustomerService-getAccountList';
 	addTask(options, callback);
 };
