@@ -21,6 +21,13 @@ class base {
 			'refresh_token' => $options['refresh_token']
 		);
 
-		$this->AdWordsUser = new AdWordsUser(NULL, $options['developer_token'], NULL, NULL, NULL, $OAuth2);
+		$this->AdWordsUser = new AdWordsUser(NULL, $options['developer_token'], 'AWE', NULL, NULL, $OAuth2);
+	}
+
+	/**
+	 * @param [String] $id
+	 */
+	public function setClientCustomerId($id) {
+		$this->AdWordsUser->SetClientCustomerId($id);
 	}
 }

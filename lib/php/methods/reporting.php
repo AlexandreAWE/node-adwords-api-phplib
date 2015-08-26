@@ -1,4 +1,5 @@
 <?php
+
 require_once dirname(__FILE__).'/../base.php';
 require_once ADWORDS_UTIL_PATH.'/ReportUtils.php';
 
@@ -6,13 +7,6 @@ class AdWordsReporting extends base {
 
 	private $tempDirPath = '/../../../temp/';
 	private $result;
-
-	/**
-	 * @param [String] $id
-	 */
-	public function setClientCustomerId($id) {
-		$this->AdWordsUser->SetClientCustomerId($id);
-	}
 
 	/**
 	 * @param [Array]  $definition

@@ -4,4 +4,4 @@ composer.phar
 vendor
 temp
 node_modules
-test/options.test.js
+test/auth.test.js

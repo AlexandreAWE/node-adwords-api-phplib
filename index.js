@@ -19,7 +19,7 @@ var queue = async.queue(function(options, callback){
 
 	var stdout = '';
 	var stderr = '';
-	var child  = child_process.spawn('php', ['./index.php', options.method, JSON.stringify(options)]);
+	var child  = child_process.spawn('php', [__dirname+'/index.php', options.method, JSON.stringify(options)]);
 
 		child.stdout.on('data', function(chunk){
 			stdout += chunk.toString();
@@ -39,6 +39,24 @@ var queue = async.queue(function(options, callback){
 		});
 
 }, _this.concurrency);
+
+/**
+ * Add Task in queue
+ * @param {Object}   options
+ * @param {Function} callback
+ */
+var addTask = function addTask(options, callback) {
+	queue.push(options, function(err, result){
+		if (err) {
+			callback(err);
+		}
+		else {
+			result = result ? JSON.parse(result) : result;
+			callback(null, result);
+		}
+	});
+};
+
 
 /**
  * Create AdwordsReport
@@ -62,13 +80,24 @@ var queue = async.queue(function(options, callback){
  */
 exports.createReport = function createReport(options, callback) {
 	options.method = 'reporting';
+	addTask(options, callback);
+};
 
-	queue.push(options, function(err, result){
-		if (err) {
-			callback(err);
-		}
-		else {
-			callback(null, JSON.parse(result));
-		}
-	});
+
+/**
+ * MCC Account List
+ * @param  {Object} options
+ *   {Object} options.credentials
+ *   {String} options.credentials['client_id']
+ *   {String} options.credentials['client_secret']
+ *   {String} options.credentials['refresh_token']
+ *   {String} options.credentials['developer_token']
+ *
+ * 	 {String} options.clientCustomerId
+ * @param  {Function} callback
+ * @return {Array}
+ */
+exports.accountList = function accountList(options, callback) {
+	options.method = 'accountList';
+	addTask(options, callback);
 };
