@@ -51,8 +51,13 @@ var addTask = function addTask(options, callback) {
 			callback(err);
 		}
 		else {
-			result = result ? JSON.parse(result) : result;
-			callback(null, result);
+			try{
+				result = result ? JSON.parse(result) : result;
+				callback(null, result);
+			}
+			catch(err){
+				callback(result+err.stack);
+			}
 		}
 	});
 };
