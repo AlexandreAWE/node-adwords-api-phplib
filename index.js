@@ -56,6 +56,7 @@ var addTask = function addTask(options, callback) {
 				callback(null, result);
 			}
 			catch(err){
+				console.log(result);
 				callback(result+err.stack);
 			}
 		}
@@ -90,7 +91,7 @@ exports.ReportDefinitionService = {
 	 * @return {Array}
 	 */
 	createReport: function createReport(options, callback) {
-		options.method = 'ManagedCustomerService-createReporting';
+		options.method = 'ReportDefinitionService-createReporting';
 		addTask(options, callback);
 	}
 };
@@ -115,8 +116,37 @@ exports.ManagedCustomerService = {
 	 * @param  {Function} callback
 	 * @return {Array}
 	 */
-	getAccountList: function accountList(options, callback) {
+	getAccountList: function getAccountList(options, callback) {
 		options.method = 'ManagedCustomerService-getAccountList';
+		addTask(options, callback);
+	}
+};
+
+/**
+ * [getCampaignList]
+ * @type {Object}
+ */
+exports.CampaignService = {
+
+	/**
+	 * Account Campaign List
+	 * @param  {Object} options
+	 *   {Object} options.credentials
+	 *   {String} options.credentials['client_id']
+	 *   {String} options.credentials['client_secret']
+	 *   {String} options.credentials['refresh_token']
+	 *   {String} options.credentials['developer_token']
+	 *
+	 *   {Object} options.reportDefinition
+	 *   {Array}  options.reportDefinition['fields']
+	 *   {Array}  options.reportDefinition['predicates']
+	 *
+	 * 	 {String} options.clientCustomerId
+	 * @param  {Function} callback
+	 * @return {Array}
+	 */
+	getCampaignList: function getCampaignList(options, callback) {
+		options.method = 'CampaignService-getCampaignList';
 		addTask(options, callback);
 	}
 };
