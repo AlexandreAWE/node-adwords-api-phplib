@@ -24,11 +24,17 @@ class ReportDefinitionService extends base {
 		// Create selector.
 		$selector = new \Selector();
 		$selector->fields 	  = $definition['fields'];
-		$selector->predicates = isset($definition['predicates']) ? $definition['predicates'] : array();
 		$selector->dateRange  = new \DateRange(
 			(new \DateTime($definition['periode']['start']))->format('Ymd'),
 			(new \DateTime($definition['periode']['end']))->format('Ymd')
 		);
+
+		// predicates
+		if (isset($definition['predicates']) && count($definition['predicates']) > 0){
+			foreach ($definition['predicates'] as $predicate) {
+				$selector->predicates[] = new \Predicate($predicate['field'], $predicate['condition'], $predicate['value']);
+			}
+		}
 
 		// Create report definition.
 		$reportDefinition = new \ReportDefinition();

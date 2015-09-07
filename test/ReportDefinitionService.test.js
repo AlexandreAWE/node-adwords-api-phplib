@@ -13,11 +13,18 @@ describe('ReportDefinitionService - createReporting', function(){
 		var options = {
 			'credentials': auth,
 			'reportDefinition' : {
-				'reportType'   : 'ACCOUNT_PERFORMANCE_REPORT',
+				'reportType'   : 'CAMPAIGN_PERFORMANCE_REPORT',
 				'periode' 	   : {'start': new Date('2015-01-01'), 'end': new Date('2015-01-31')},
-				'fields' 	   : ['Clicks', 'ConversionValue', 'Ctr', 'Cost']
+				'fields' 	   : ['Clicks', 'ConversionValue', 'Ctr', 'Cost'],
+				'predicates'   :[
+					{
+                        "value" : ["59745991", "59746111"],
+                        "condition" : "IN",
+                        "field" : "CampaignId"
+                    }
+				]
 			},
-			'clientCustomerId' : '734-817-8239'
+			'clientCustomerId' : '7025334984'
 		};
 
 		adwords.ReportDefinitionService.createReport(options, function(err, result){
