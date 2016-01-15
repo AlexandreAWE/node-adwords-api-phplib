@@ -33,9 +33,9 @@ $depth = '/../../vendor/googleads/googleads-php-lib/';
 define('SRC_PATH', dirname(__FILE__) . $depth . 'src/');
 define('LIB_PATH', 'Google/Api/Ads/AdWords/Lib');
 define('UTIL_PATH', 'Google/Api/Ads/Common/Util');
-define('ADWORDS_UTIL_PATH', 'Google/Api/Ads/AdWords/Util');
-
 define('ADWORDS_VERSION', 'v201506');
+define('ADWORDS_UTIL_PATH', 'Google/Api/Ads/AdWords/Util/'.ADWORDS_VERSION);
+
 
 // Configure include path
 ini_set('include_path', implode(array(
