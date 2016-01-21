@@ -96,6 +96,28 @@ exports.ReportDefinitionService = {
 	}
 };
 
+/**
+ * [CustomerService]
+ * @type {Object}
+ */
+exports.CustomerService = {
+
+	/**
+	 * MCC Account List
+	 * @param  {Object} options
+	 *   {Object} options.credentials
+	 *   {String} options.credentials['client_id']
+	 *   {String} options.credentials['client_secret']
+	 *   {String} options.credentials['refresh_token']
+	 *   {String} options.credentials['developer_token']
+	 * @param  {Function} callback
+	 * @return {Array}
+	 */
+	getInfos: function getInfos(options, callback) {
+		options.method = 'CustomerService-getInfos';
+		addTask(options, callback);
+	}
+};
 
 /**
  * [getAccountList]

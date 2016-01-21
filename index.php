@@ -3,6 +3,7 @@
 namespace NodeAdWordsApiPhpLib;
 
 require_once 'lib/php/services/ReportDefinitionService.php';
+require_once 'lib/php/services/CustomerService.php';
 require_once 'lib/php/services/ManagedCustomerService.php';
 require_once 'lib/php/services/CampaignService.php';
 
@@ -11,6 +12,7 @@ $options = json_decode($argv[2], true);
 
 switch ($method) {
 	case 'ReportDefinitionService-createReporting': createReporting($options); break;
+	case 'CustomerService-getInfos' : getCustomerInfos($options); break;
 	case 'ManagedCustomerService-getAccountList' : getAccountList($options); break;
 	case 'CampaignService-getCampaignList' : getCampaignList($options); break;
 	default: throw new \Exception('Unknown Method'); break;
@@ -31,6 +33,22 @@ function createReporting($options) {
 
 	fwrite(STDOUT, $data);
 }
+
+
+/**
+ * Get Customer info
+ * @param  [Array] $options
+ */
+function getCustomerInfos($options) {
+	$CustomerService = new CustomerService();
+	$CustomerService->auth($options['credentials']);
+
+	$data = $CustomerService->getInfos();
+	$data = json_encode($data);
+
+	fwrite(STDOUT, $data);
+}
+
 
 /**
  * List MCC Account

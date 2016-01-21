@@ -24,6 +24,5 @@ describe('ManagedCustomerService - getAccountList', function(){
 				done();
 			}
 		});
-
 	});
 });
