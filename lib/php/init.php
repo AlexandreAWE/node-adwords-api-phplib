@@ -33,7 +33,7 @@ $depth = '/../../vendor/googleads/googleads-php-lib/';
 define('SRC_PATH', dirname(__FILE__) . $depth . 'src/');
 define('LIB_PATH', 'Google/Api/Ads/AdWords/Lib');
 define('UTIL_PATH', 'Google/Api/Ads/Common/Util');
-define('ADWORDS_VERSION', 'v201509');
+define('ADWORDS_VERSION', 'v201605');
 define('ADWORDS_UTIL_PATH', 'Google/Api/Ads/AdWords/Util/'.ADWORDS_VERSION);
 
 

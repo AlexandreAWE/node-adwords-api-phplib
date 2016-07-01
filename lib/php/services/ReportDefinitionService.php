@@ -43,13 +43,13 @@ class ReportDefinitionService extends base {
 		$reportDefinition->dateRangeType = 'CUSTOM_DATE';
 		$reportDefinition->reportType = $definition['reportType'];
 		$reportDefinition->downloadFormat = 'CSV';
-		$reportDefinition->includeZeroImpressions = FALSE;
 
-		$options = array('version' => ADWORDS_VERSION);
+		$options = array('version' => ADWORDS_VERSION, 'includeZeroImpressions' => false);
 
 		// Download report.
 		try{
-			$report 	  = \ReportUtils::DownloadReport($reportDefinition, $filePath, $this->AdWordsUser, $options);
+            $reportUtils = new \ReportUtils();
+			$report 	  = $reportUtils->DownloadReport($reportDefinition, $filePath, $this->AdWordsUser, $options);
 			$this->result = $this->parseAccountReport($filePath);
 			$this->result = $this->convertMicroMoney($definition['fields'], $this->result);
 		}
