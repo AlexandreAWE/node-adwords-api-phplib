@@ -12,11 +12,11 @@ class CustomerService extends base {
 	 */
 	public function getInfos(){
 		$CustomerService = $this->AdWordsUser->GetService('CustomerService', ADWORDS_VERSION);
-        $response = $CustomerService->get();
+        $response = $CustomerService->getCustomers();
 
         return [
-            'companyName' => $response->companyName,
-            'customerId'  => $response->customerId,
+            'companyName' => $response[0]->companyName,
+            'customerId'  => $response[0]->customerId,
         ];
 	}
 }
