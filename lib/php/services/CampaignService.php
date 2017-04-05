@@ -4,6 +4,11 @@ namespace NodeAdWordsApiPhpLib;
 
 require_once dirname(__FILE__).'/../base.php';
 
+use Google\AdsApi\AdWords\AdWordsServices;
+use Google\AdsApi\AdWords\v201702\cm\Selector;
+use Google\AdsApi\AdWords\v201702\cm\Predicate;
+use Google\AdsApi\AdWords\v201702\cm\CampaignService as GoogleCampaignService;
+
 class CampaignService extends base {
 
 	/**
@@ -12,19 +17,21 @@ class CampaignService extends base {
 	 */
 	public function getList(){
 
-		$campaignService = $this->AdWordsUser->GetService('CampaignService', ADWORDS_VERSION);
-		$selector = new \Selector();
+		$adWordsServices = new AdWordsServices();
+		$campaignService = $adWordsServices->get($this->getSession(), GoogleCampaignService::class);
+		
+		$selector = new Selector();
 
-		$selector->fields = array('Id', 'Name', 'Status');
-		$selector->predicates = [new \Predicate('Status', 'EQUALS', 'ENABLED')];
+		$selector->setFields(array('Id', 'Name', 'Status'));
+		$selector->setPredicates([new Predicate('Status', 'EQUALS', ['ENABLED'])]);
 
 		$campaigns = $campaignService->get($selector);
 		$list = [];
 
-		foreach ($campaigns->entries as $v) {
+		foreach ($campaigns->getEntries() as $v) {
 			$list[] = [
-				'id'   => $v->id,
-				'name' => $v->name
+				'id'   => $v->getId(),
+				'name' => $v->getName()
 			];
 		}
 

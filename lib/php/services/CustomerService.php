@@ -4,6 +4,10 @@ namespace NodeAdWordsApiPhpLib;
 
 require_once dirname(__FILE__).'/../base.php';
 
+use Google\AdsApi\AdWords\AdWordsServices;
+use Google\AdsApi\AdWords\v201702\cm\Selector;
+use Google\AdsApi\AdWords\v201702\mcm\CustomerService as GoogleCustomerService;
+
 class CustomerService extends base {
 
     /**
@@ -11,12 +15,13 @@ class CustomerService extends base {
 	 * @return [Array]
 	 */
 	public function getInfos(){
-		$CustomerService = $this->AdWordsUser->GetService('CustomerService', ADWORDS_VERSION);
-        $response = $CustomerService->getCustomers();
+		$adWordsServices = new AdWordsServices();
+		$customerService = $adWordsServices->get($this->getSession(), GoogleCustomerService::class);
+        $response = $customerService->getCustomers();
 
         return [
-            'companyName' => $response[0]->companyName,
-            'customerId'  => $response[0]->customerId,
+            'companyName' => $response[0]->getDescriptiveName(),
+            'customerId'  => (string)$response[0]->getCustomerId(),
         ];
 	}
 }

@@ -1,6 +1,6 @@
 {
   "name": "node-adwords-api-phplib",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "This package is using AdWords PHP lib in order to use AdWordsAPI with NodeJS",
   "main": "index.js",
   "scripts": {

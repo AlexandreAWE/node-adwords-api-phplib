@@ -4,13 +4,17 @@ namespace NodeAdWordsApiPhpLib;
 
 require_once dirname(__FILE__).'/../base.php';
 
+use Google\AdsApi\AdWords\AdWordsServices;
+use Google\AdsApi\AdWords\v201702\cm\Selector;
+use Google\AdsApi\AdWords\v201702\mcm\ManagedCustomerService as GoogleManagedCustomerService;
+
 class ManagedCustomerService extends base {
 
 	public function getList() {
 		$list = $this->getAccounts();
 
 		foreach ($list as $index => $account) {
-			$this->AdWordsUser->SetClientCustomerId($account['customerId']);
+			$this->session->withClientCustomerId($account['customerId']);
 			$list[$index]['subAccounts'] = $this->getAccounts();
 		}
 
@@ -22,17 +26,19 @@ class ManagedCustomerService extends base {
 	 * @return [Array]
 	 */
 	private function getAccounts(){
-		$managedCustomerService = $this->AdWordsUser->GetService('ManagedCustomerService', ADWORDS_VERSION);
-		$selector = new \Selector();
-		$selector->fields = array('Name','CustomerId');
+		$adWordsServices = new AdWordsServices();
+		$managedCustomerService = $adWordsServices->get($this->getSession(), GoogleManagedCustomerService::class);
+
+		$selector = new Selector();
+		$selector->setFields(array('Name','CustomerId'));
 		$graph = $managedCustomerService->get($selector);
 		$accounts = array();
 
-		foreach ($graph->entries as $account){
-		  if ($this->AdWordsUser->GetClientCustomerId() !== $account->customerId) {
+		foreach ($graph->getEntries() as $account){
+		  if ($this->session->GetClientCustomerId() !== $account->getCustomerId()) {
 			  $accounts[] = [
-				  "customerId" => $account->customerId,
-				  "name" 	   => $account->name
+				  "customerId" => $account->getCustomerId(),
+				  "name" 	   => $account->getName()
 			  ];
 		  }
 		}

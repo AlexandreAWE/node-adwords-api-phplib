@@ -3,7 +3,13 @@
 namespace NodeAdWordsApiPhpLib;
 
 require_once dirname(__FILE__).'/../base.php';
-require_once ADWORDS_UTIL_PATH.'/ReportUtils.php';
+
+use Google\AdsApi\AdWords\Reporting\v201702\ReportDefinition;
+use Google\AdsApi\AdWords\v201702\cm\ReportDefinitionReportType;
+use Google\AdsApi\AdWords\v201702\cm\Selector;
+use Google\AdsApi\AdWords\v201702\cm\DateRange;
+use Google\AdsApi\AdWords\v201702\cm\Predicate;
+use Google\AdsApi\AdWords\Reporting\v201702\ReportDownloader;
 
 class ReportDefinitionService extends base {
 
@@ -19,37 +25,40 @@ class ReportDefinitionService extends base {
 	 */
 	public function createReport(Array $definition) {
 		$filePath = dirname(__FILE__).$this->tempDirPath.uniqid().'report.csv';
-		$this->AdWordsUser->LoadService('ReportDefinitionService', ADWORDS_VERSION);
 
-		// Create selector.
-		$selector = new \Selector();
-		$selector->fields 	  = $definition['fields'];
-		$selector->dateRange  = new \DateRange(
-			(new \DateTime($definition['periode']['start']))->format('Ymd'),
-			(new \DateTime($definition['periode']['end']))->format('Ymd')
-		);
+		// Create Data range
+		$dateRange = new DateRange();
+        $dateRange->setMin((new \DateTime($definition['periode']['start']))->format('Ymd'));
+        $dateRange->setMax((new \DateTime($definition['periode']['end']))->format('Ymd'));
 
-		// predicates
+		// Set predicates
+		$predicates = [];
 		if (isset($definition['predicates']) && count($definition['predicates']) > 0){
 			foreach ($definition['predicates'] as $predicate) {
-				$selector->predicates[] = new \Predicate($predicate['field'], $predicate['condition'], $predicate['value']);
+				$predicates[] = new Predicate($predicate['field'], $predicate['condition'], $predicate['value']);
 			}
 		}
 
-		// Create report definition.
-		$reportDefinition = new \ReportDefinition();
-		$reportDefinition->selector = $selector;
-		$reportDefinition->reportName = 'Custom Report';
-		$reportDefinition->dateRangeType = 'CUSTOM_DATE';
-		$reportDefinition->reportType = $definition['reportType'];
-		$reportDefinition->downloadFormat = 'CSV';
+		// Create selector.
+		$selector = new Selector();
+		$selector->setFields($definition['fields']);
+        $selector->setDateRange($dateRange);
+		$selector->setPredicates($predicates);
 
-		$options = array('version' => ADWORDS_VERSION, 'includeZeroImpressions' => false);
+
+		// Create report definition.
+		$reportDefinition = new ReportDefinition();
+		$reportDefinition->setSelector($selector);
+		$reportDefinition->setReportName('Custom Report');
+		$reportDefinition->setDateRangeType('CUSTOM_DATE');
+		$reportDefinition->setReportType($definition['reportType']);
+		$reportDefinition->setDownloadFormat('CSV');
 
 		// Download report.
 		try{
-            $reportUtils = new \ReportUtils();
-			$report 	  = $reportUtils->DownloadReport($reportDefinition, $filePath, $this->AdWordsUser, $options);
+			$reportDownloader = new ReportDownloader($this->getSession());
+			$report = $reportDownloader->downloadReport($reportDefinition);
+			$report->saveToFile($filePath);
 			$this->result = $this->parseAccountReport($filePath);
 			$this->result = $this->convertMicroMoney($definition['fields'], $this->result);
 		}
