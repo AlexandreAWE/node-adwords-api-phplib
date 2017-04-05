@@ -31,19 +31,19 @@ class ReportDefinitionService extends base {
         $dateRange->setMin((new \DateTime($definition['periode']['start']))->format('Ymd'));
         $dateRange->setMax((new \DateTime($definition['periode']['end']))->format('Ymd'));
 
-		// Set predicates
-		$predicates = [];
-		if (isset($definition['predicates']) && count($definition['predicates']) > 0){
-			foreach ($definition['predicates'] as $predicate) {
-				$predicates[] = new Predicate($predicate['field'], $predicate['condition'], $predicate['value']);
-			}
-		}
-
 		// Create selector.
 		$selector = new Selector();
 		$selector->setFields($definition['fields']);
         $selector->setDateRange($dateRange);
-		$selector->setPredicates($predicates);
+
+		// Set predicates
+		if (isset($definition['predicates']) && count($definition['predicates']) > 0){
+			$predicates = [];
+			foreach ($definition['predicates'] as $predicate) {
+				$predicates[] = new Predicate($predicate['field'], $predicate['condition'], $predicate['value']);
+			}
+			$selector->setPredicates($predicates);
+		}
 
 
 		// Create report definition.
