@@ -56,8 +56,7 @@ var addTask = function addTask(options, callback) {
 				callback(null, result);
 			}
 			catch(err){
-				console.log(result);
-				callback(result+err.stack);
+				callback(result);
 			}
 		}
 	});
