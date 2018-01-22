@@ -5,8 +5,8 @@ namespace NodeAdWordsApiPhpLib;
 require_once dirname(__FILE__).'/../base.php';
 
 use Google\AdsApi\AdWords\AdWordsServices;
-use Google\AdsApi\AdWords\v201702\cm\Selector;
-use Google\AdsApi\AdWords\v201702\mcm\CustomerService as GoogleCustomerService;
+use Google\AdsApi\AdWords\v201710\cm\Selector;
+use Google\AdsApi\AdWords\v201710\mcm\CustomerService as GoogleCustomerService;
 
 class CustomerService extends base {
 

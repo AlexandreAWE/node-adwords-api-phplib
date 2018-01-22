@@ -4,12 +4,12 @@ namespace NodeAdWordsApiPhpLib;
 
 require_once dirname(__FILE__).'/../base.php';
 
-use Google\AdsApi\AdWords\Reporting\v201702\ReportDefinition;
-use Google\AdsApi\AdWords\v201702\cm\ReportDefinitionReportType;
-use Google\AdsApi\AdWords\v201702\cm\Selector;
-use Google\AdsApi\AdWords\v201702\cm\DateRange;
-use Google\AdsApi\AdWords\v201702\cm\Predicate;
-use Google\AdsApi\AdWords\Reporting\v201702\ReportDownloader;
+use Google\AdsApi\AdWords\Reporting\v201710\ReportDefinition;
+use Google\AdsApi\AdWords\v201710\cm\ReportDefinitionReportType;
+use Google\AdsApi\AdWords\v201710\cm\Selector;
+use Google\AdsApi\AdWords\v201710\cm\DateRange;
+use Google\AdsApi\AdWords\v201710\cm\Predicate;
+use Google\AdsApi\AdWords\Reporting\v201710\ReportDownloader;
 
 class ReportDefinitionService extends base {
 
