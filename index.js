@@ -52,7 +52,8 @@ var addTask = function addTask(options, callback) {
 		}
 		else {
 			try{
-				result = result ? JSON.parse(result) : result;
+				result = _parseResult(options, result);
+
 				callback(null, result);
 			}
 			catch(err){
@@ -62,6 +63,31 @@ var addTask = function addTask(options, callback) {
 	});
 };
 
+/**
+ * Parse result of a report definition (or other)
+ * slice it if a max number of results is asked
+ *
+ * @param {object} options
+ * @param {number} options.numberResults
+ * @param {object[]} _result
+ * @returns {object[]} result
+ * @private
+ */
+var _parseResult = function _parseResult(options, _result) {
+	try {
+        var result = _result ? JSON.parse(_result) : _result;
+        var numberResults = isNaN(Number(options.numberResults)) ? 'undefined' : Number(options.numberResults);
+
+        if (typeof numberResults === 'number') {
+        	result = result.slice(0, numberResults);
+		}
+
+        return result;
+    }
+    catch(err) {
+		throw err;
+	}
+};
 
 /**
  * [ReportDefinitionService]
