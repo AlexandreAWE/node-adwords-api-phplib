@@ -4,3 +4,4 @@ temp
 node_modules
 test/auth.test.js
 .idea
+package-lock.json
