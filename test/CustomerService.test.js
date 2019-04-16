@@ -15,10 +15,11 @@ describe('CustomerService - getInfos', function(){
 		};
 
 		adwords.CustomerService.getInfos(options, function(err, result){
-            if (err) {
+			if (err) {
 				done(err);
 			}
 			else {
+				console.log(require('util').inspect(result, { depth: null }));
 				expect(result.companyName).to.be.ok();
 				expect(result.companyName).to.be.a('string');
 				expect(result.customerId).to.be.ok();
