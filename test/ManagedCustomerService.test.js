@@ -7,7 +7,6 @@ var auth    = require('./auth.test.js');
 describe('ManagedCustomerService - getAccountList', function(){
 
 	it('Should return Array', function(done){
-
 		this.timeout(100000000);
 
 		var options = {

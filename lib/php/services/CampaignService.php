@@ -5,9 +5,9 @@ namespace NodeAdWordsApiPhpLib;
 require_once dirname(__FILE__).'/../base.php';
 
 use Google\AdsApi\AdWords\AdWordsServices;
-use Google\AdsApi\AdWords\v201806\cm\Selector;
-use Google\AdsApi\AdWords\v201806\cm\Predicate;
-use Google\AdsApi\AdWords\v201806\cm\CampaignService as GoogleCampaignService;
+use Google\AdsApi\AdWords\v201809\cm\Selector;
+use Google\AdsApi\AdWords\v201809\cm\Predicate;
+use Google\AdsApi\AdWords\v201809\cm\CampaignService as GoogleCampaignService;
 
 class CampaignService extends base {
 
@@ -19,7 +19,7 @@ class CampaignService extends base {
 
 		$adWordsServices = new AdWordsServices();
 		$campaignService = $adWordsServices->get($this->getSession(), GoogleCampaignService::class);
-		
+
 		$selector = new Selector();
 
 		$selector->setFields(array('Id', 'Name', 'Status'));

@@ -5,8 +5,8 @@ namespace NodeAdWordsApiPhpLib;
 require_once dirname(__FILE__).'/../base.php';
 
 use Google\AdsApi\AdWords\AdWordsServices;
-use Google\AdsApi\AdWords\v201806\cm\Selector;
-use Google\AdsApi\AdWords\v201806\mcm\ManagedCustomerService as GoogleManagedCustomerService;
+use Google\AdsApi\AdWords\v201809\cm\Selector;
+use Google\AdsApi\AdWords\v201809\mcm\ManagedCustomerService as GoogleManagedCustomerService;
 
 class ManagedCustomerService extends base {
 
